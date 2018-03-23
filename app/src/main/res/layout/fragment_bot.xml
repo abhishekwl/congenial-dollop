@@ -1,0 +1,63 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="io.github.abhishekwl.electricsheepprimary.Fragments.BotFragment">
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/botTitleTextView"
+            android:layout_weight="1"
+            android:textColor="@color/colorTextDark"
+            android:textSize="32sp"
+            android:text="F.A.Q :)"
+            android:textStyle="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_fileName="lottie/wink.json"
+            android:layout_width="56dp"
+            android:layout_height="56dp" />
+
+    </LinearLayout>
+
+    <com.stfalcon.chatkit.messages.MessagesList
+        android:id="@+id/botMessagesList"
+        app:incomingBubblePaddingLeft="16dp"
+        app:incomingBubblePaddingRight="16dp"
+        app:incomingBubblePaddingTop="8dp"
+        app:incomingBubblePaddingBottom="8dp"
+        app:outcomingBubblePaddingLeft="16dp"
+        app:outcomingBubblePaddingRight="16dp"
+        app:outcomingBubblePaddingTop="8dp"
+        app:outcomingBubblePaddingBottom="8dp"
+        app:outcomingDefaultBubbleColor="@color/colorAccent"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+    </com.stfalcon.chatkit.messages.MessagesList>
+
+    <com.stfalcon.chatkit.messages.MessageInput
+        android:id="@+id/botMessageInput"
+        app:inputTextSize="16sp"
+        app:inputHint="Message"
+        app:inputButtonDefaultBgColor="@color/colorAccent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.stfalcon.chatkit.messages.MessageInput>
+
+</LinearLayout>

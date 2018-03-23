@@ -1,0 +1,72 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="io.github.abhishekwl.electricsheepprimary.Fragments.HomeFragment">
+
+    <LinearLayout
+        android:id="@+id/homeMainLinearLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:padding="20dp"
+            android:background="@color/colorAccent"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/homeAppLogoImageView"
+                android:layout_marginTop="64dp"
+                tools:src="@drawable/energy_white"
+                android:layout_width="164dp"
+                android:layout_height="164dp" />
+
+            <TextView
+                android:id="@+id/homeWelcomeTextView"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:textSize="32sp"
+                android:layout_marginTop="32dp"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/homeViewTravelPlanButton"
+                android:layout_marginBottom="32dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textAllCaps="false"
+                android:text="View Travel Plan"
+                android:background="@drawable/rounded_button_accent"
+                android:layout_marginTop="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:padding="18dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/homeDashboardTextView"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextDark"
+                android:text="DASHBOARD"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

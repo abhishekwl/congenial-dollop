@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuItemHome"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Home" />
+    <item
+        android:id="@+id/menuItemRadio"
+        android:icon="@drawable/ic_record_voice_over_black_24dp"
+        android:title="Radio" />
+    <item
+        android:id="@+id/menuItemNearby"
+        android:icon="@drawable/ic_near_me_black_24dp"
+        android:title="Nearby" />
+    <item
+        android:id="@+id/menuItemTravelPlan"
+        android:icon="@drawable/ic_details_black_24dp"
+        android:title="Plan" />
+    <item
+        android:id="@+id/menuItemBot"
+        android:icon="@drawable/ic_face_black_24dp"
+        android:title="Bot" />
+</menu>
