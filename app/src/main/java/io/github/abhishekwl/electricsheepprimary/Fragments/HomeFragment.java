@@ -41,7 +41,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.PlaceDetectionClient;
 import com.google.android.gms.location.places.PlaceLikelihoodBufferResponse;
 import com.google.android.gms.location.places.Places;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -175,16 +174,21 @@ public class HomeFragment extends Fragment {
 
         placeDetectionClient = Places.getPlaceDetectionClient(getActivity());
         @SuppressLint("MissingPermission") Task<PlaceLikelihoodBufferResponse> placeResult = placeDetectionClient.getCurrentPlace(null);
-        placeResult.addOnCompleteListener(new OnCompleteListener<PlaceLikelihoodBufferResponse>() {
+        placeResult.addOnSuccessListener(new OnSuccessListener<PlaceLikelihoodBufferResponse>() {
             @SuppressLint("RestrictedApi")
             @Override
-            public void onComplete(@NonNull Task<PlaceLikelihoodBufferResponse> task) {
-                PlaceLikelihoodBufferResponse likelyPlaces = task.getResult();
-                if (likelyPlaces.getCount()>0) {
-                    String placeName = likelyPlaces.get(0).getPlace().getName().toString();
+            public void onSuccess(PlaceLikelihoodBufferResponse placeLikelihoods) {
+                if (placeLikelihoods.getCount()>0) {
+                    String placeName = placeLikelihoods.get(0).getPlace().getName().toString();
                     welcomeTextView.setText("Welcome to "+placeName+".");
                 }
-                likelyPlaces.release();
+                placeLikelihoods.release();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                welcomeTextView.setText("Welcome.");
+                Log.v("HOME_FRAG", e.getMessage());
             }
         });
 
@@ -277,6 +281,18 @@ public class HomeFragment extends Fragment {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        unbinder = ButterKnife.bind(this, rootView);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        unbinder = ButterKnife.bind(this, rootView);
     }
 
     @Override

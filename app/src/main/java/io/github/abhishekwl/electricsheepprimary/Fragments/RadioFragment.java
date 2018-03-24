@@ -2,6 +2,7 @@ package io.github.abhishekwl.electricsheepprimary.Fragments;
 
 
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -78,7 +79,9 @@ public class RadioFragment extends Fragment {
         try {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.reset();
-            mediaPlayer.setDataSource("http://192.168.10.168:8000/stream1");
+            //mediaPlayer.setDataSource("http://192.168.10.168:8000/stream1");
+            mediaPlayer.setDataSource("http://192.168.10.158:8080/Marshmello_ft_Khalid_-_Silence_Talkmuzik.mp3");
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {

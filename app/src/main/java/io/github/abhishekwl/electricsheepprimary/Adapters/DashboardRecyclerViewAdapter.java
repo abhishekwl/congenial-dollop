@@ -1,6 +1,5 @@
 package io.github.abhishekwl.electricsheepprimary.Adapters;
 
-import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +43,6 @@ public class DashboardRecyclerViewAdapter extends RecyclerView.Adapter<Dashboard
         currentDate = currentDate.substring(0, currentDate.indexOf("GMT")).trim();
         holder.notificationDateTextView.setText(currentDate);
         holder.notificationContentTextView.setText(dashboardNotification.getNotificationContent());
-        holder.notificationImageView.setColorFilter(holder.colorAccent, PorterDuff.Mode.SRC_IN);
     }
 
     @Override
