@@ -7,6 +7,9 @@
     app:cardElevation="2dp"
     android:id="@+id/dashboardNotificationCardView"
     app:cardUseCompatPadding="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -21,6 +24,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:id="@+id/dashboardNotificationImageView"
                 android:tintMode="multiply"
                 android:tint="@color/colorAccent"
                 android:src="@drawable/ic_notifications_black_24dp"

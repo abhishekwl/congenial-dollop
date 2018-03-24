@@ -25,7 +25,7 @@
 
                 <ImageView
                     android:id="@+id/homeAppLogoImageView"
-                    android:layout_marginTop="64dp"
+                    android:layout_marginTop="70dp"
                     tools:src="@drawable/energy_white"
                     android:layout_width="164dp"
                     android:layout_height="164dp" />
@@ -34,9 +34,10 @@
                     android:id="@+id/homeWelcomeTextView"
                     android:textStyle="bold"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="32sp"
-                    android:layout_marginTop="32dp"
+                    android:textSize="48sp"
+                    android:layout_marginTop="40dp"
                     android:text=""
+                    tools:text="Welcome to Bangalore City JN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -50,7 +51,7 @@
                     android:textAllCaps="false"
                     android:text="View Travel Plan"
                     android:background="@drawable/rounded_button_accent"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="40dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

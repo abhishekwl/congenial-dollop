@@ -130,6 +130,7 @@ public class HomeFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             dashboardRecylcerView.setAdapter(dashboardRecyclerViewAdapter);
+            dashboardRecylcerView.scrollToPosition(0);
         }
     }
 
@@ -181,7 +182,7 @@ public class HomeFragment extends Fragment {
                 PlaceLikelihoodBufferResponse likelyPlaces = task.getResult();
                 if (likelyPlaces.getCount()>0) {
                     String placeName = likelyPlaces.get(0).getPlace().getName().toString();
-                    welcomeTextView.setText("Welcome to "+placeName);
+                    welcomeTextView.setText("Welcome to "+placeName+".");
                 }
                 likelyPlaces.release();
             }
