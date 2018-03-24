@@ -198,12 +198,6 @@ public class HomeFragment extends Fragment {
                 super.onSwipeTop();
                 displayDialog();
             }
-
-            @Override
-            public void onSwipeBottom() {
-                super.onSwipeBottom();
-                displayDialog();
-            }
         });
     }
 
@@ -259,14 +253,8 @@ public class HomeFragment extends Fragment {
     public void onCall() {
         int permissionCheck = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE);
 
-        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                    getActivity(),
-                    new String[]{Manifest.permission.CALL_PHONE},
-                    123);
-        } else {
-            startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:9663265931")));
-        }
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE},123);
+        else startActivity(new Intent(Intent.ACTION_CALL).setData(Uri.parse("tel:9663265931")));
     }
 
     @Override
@@ -274,11 +262,8 @@ public class HomeFragment extends Fragment {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case 123:
-                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    onCall();
-                } else {
-                    Log.v("PERMISSION", "Call Permission Not Granted");
-                }
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) onCall();
+                else Log.v("PERMISSION", "Call Permission Not Granted");
                 break;
         }
     }

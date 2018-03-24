@@ -2,36 +2,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSecondary"
     tools:context="io.github.abhishekwl.electricsheepprimary.Fragments.RadioFragment">
 
     <LinearLayout
+        android:padding="20dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/radioTowerImageView"
+            android:layout_marginTop="80dp"
+            tools:src="@drawable/tower"
+            android:layout_width="216dp"
+            android:layout_height="216dp" />
+
+        <TextView
+            android:id="@+id/radioInternetRadioTextView"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:textSize="48sp"
+            android:layout_marginTop="32dp"
+            android:text="Internet Radio."
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
-            android:padding="20dp"
-            android:background="@color/colorSecondary"
-            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/radioTowerImageView"
-                android:layout_marginTop="64dp"
-                tools:src="@drawable/tower"
-                android:layout_width="164dp"
-                android:layout_height="164dp" />
-
-            <TextView
-                android:id="@+id/radioInternetRadioTextView"
-                android:textStyle="bold"
-                android:textColor="@color/colorPrimary"
-                android:textSize="48sp"
-                android:layout_marginTop="32dp"
-                android:text="Internet Radio."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/radioPauseButton"
@@ -43,24 +44,20 @@
                 android:textAllCaps="false"
                 android:text="Pause"
                 android:background="@drawable/round_button_white"
-                android:layout_marginTop="32dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:padding="18dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/radioCatalogTextView"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/colorTextDark"
-                android:text="CATALOGUE"
+            <Button
+                android:layout_marginStart="32dp"
+                android:id="@+id/radioFmButton"
+                android:layout_marginBottom="32dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="18sp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textAllCaps="false"
+                android:text="FM"
+                android:background="@drawable/round_button_secondary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

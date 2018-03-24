@@ -1,9 +1,12 @@
 package io.github.abhishekwl.electricsheepprimary.Fragments;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -21,6 +24,7 @@ import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.github.abhishekwl.electricsheepprimary.R;
 
@@ -35,13 +39,10 @@ public class RadioFragment extends Fragment {
     private MediaPlayer mediaPlayer;
 
     @BindView(R.id.radioTowerImageView) ImageView radioImageView;
-    @BindView(R.id.radioCatalogTextView) TextView catalogTextView;
     @BindView(R.id.radioInternetRadioTextView) TextView internetRadioTextView;
     @BindView(R.id.radioPauseButton) Button pauseButton;
 
-    public RadioFragment() {
-        // Required empty public constructor
-    }
+    public RadioFragment() {}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,23 +57,9 @@ public class RadioFragment extends Fragment {
         futuraTypeface = Typeface.createFromAsset(rootView.getContext().getAssets(), "fonts/futura.ttf");
 
         internetRadioTextView.setTypeface(futuraTypeface);
-        catalogTextView.setTypeface(futuraTypeface);
         pauseButton.setTypeface(futuraTypeface);
 
         setupMediaPlayer();
-
-        pauseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mediaPlayer.isPlaying()) {
-                    mediaPlayer.pause();
-                    pauseButton.setText("Play");
-                } else {
-                    mediaPlayer.start();
-                    pauseButton.setText("Pause");
-                }
-            }
-        });
     }
 
     private void setupMediaPlayer() {
@@ -98,6 +85,39 @@ public class RadioFragment extends Fragment {
         } catch (IOException e) {
             Log.v("RADIO", e.getMessage());
         }
+    }
+
+    @OnClick(R.id.radioPauseButton)
+    public void onPauseButtonClick() {
+        if (mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+            pauseButton.setText("Play");
+        } else {
+            mediaPlayer.start();
+            pauseButton.setText("Pause");
+        }
+    }
+
+    @OnClick(R.id.radioFmButton)
+    public void onRadioButtonClick() {
+        startApp(rootView.getContext(), "com.miui.fm");
+    }
+
+    public void startApp(Context context, String packageName) {
+        Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
+        if (intent == null) {
+            intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse("market://details?id=" + packageName));
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mediaPlayer.isPlaying()) mediaPlayer.stop();
     }
 
     @Override
