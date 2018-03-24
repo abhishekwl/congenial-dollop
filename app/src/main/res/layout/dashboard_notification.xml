@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="@android:color/white"
+    app:contentPadding="16dp"
+    app:cardElevation="2dp"
+    android:id="@+id/dashboardNotificationCardView"
+    app:cardUseCompatPadding="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:tintMode="multiply"
+                android:tint="@color/colorAccent"
+                android:src="@drawable/ic_notifications_black_24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/dashboardNotificationDate"
+                android:textStyle="bold"
+                android:textColor="@color/colorTextDark"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                tools:text="Current Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dashboardNotificationContent"
+            android:fontFamily="sans-serif-light"
+            android:textSize="16sp"
+            tools:text="Train XYZ leaves at so and so time. Hope you have a safe trip :)"
+            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

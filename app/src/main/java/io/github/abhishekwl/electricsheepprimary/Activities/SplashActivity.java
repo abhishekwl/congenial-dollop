@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
     @BindView(R.id.splashAppLogoImageView) ImageView appLogoImageView;
 
     private Unbinder unbinder;
-    private static final int SPLASH_DELAY = 2000;
+    private static final int SPLASH_DELAY = 1500;
     private FirebaseAuth firebaseAuth;
 
     @Override

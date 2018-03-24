@@ -8,19 +8,22 @@ import android.content.pm.PackageManager;
 import android.graphics.Typeface;
 import android.location.Location;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -47,12 +50,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.github.abhishekwl.electricsheepprimary.Adapters.DashboardRecyclerViewAdapter;
+import io.github.abhishekwl.electricsheepprimary.Models.DashboardNotification;
 import io.github.abhishekwl.electricsheepprimary.R;
 
 /**
@@ -60,11 +66,11 @@ import io.github.abhishekwl.electricsheepprimary.R;
  */
 public class HomeFragment extends Fragment {
 
+    @BindView(R.id.homeDashboardRecyclerView) RecyclerView dashboardRecylcerView;
     @BindView(R.id.homeAppLogoImageView) ImageView appLogoImageView;
     @BindView(R.id.homeWelcomeTextView) TextView welcomeTextView;
     @BindView(R.id.homeViewTravelPlanButton) Button travelPlanButton;
     @BindView(R.id.homeDashboardTextView) TextView dashboardTextView;
-    @BindView(R.id.homeMainLinearLayout) LinearLayout mainLinearLayout;
     @BindColor(R.color.colorAccent) int colorAccent;
 
     private PlaceDetectionClient placeDetectionClient;
@@ -72,12 +78,14 @@ public class HomeFragment extends Fragment {
     private Unbinder unbinder;
     private Typeface futuraTypeface;
     private BottomNavigationView bottomNavigationView;
-    private MaterialDialog materialDialog;
     private Location deviceLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private FirebaseAuth firebaseAuth;
     private RequestQueue requestQueue;
     private JSONObject userObject;
+    private DashboardRecyclerViewAdapter dashboardRecyclerViewAdapter;
+    private ArrayList<DashboardNotification> dashboardNotifications = new ArrayList<>();
+    private MaterialDialog materialDialog;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -95,6 +103,34 @@ public class HomeFragment extends Fragment {
     private void processViews(View rootView) {
         setupHeader(rootView);
         setupListeners();
+        new SetupRecyclerView().execute();
+    }
+
+    private class SetupRecyclerView extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dashboardRecylcerView.setLayoutManager(new LinearLayoutManager(rootView.getContext()));
+            dashboardRecylcerView.setHasFixedSize(true);
+            dashboardRecylcerView.setItemAnimator(new DefaultItemAnimator());
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            dashboardNotifications.clear();
+            for (int i=0; i<10; i++) {
+                dashboardNotifications.add(new DashboardNotification(new Date(), "Notification "+i));
+            }
+            dashboardRecyclerViewAdapter = new DashboardRecyclerViewAdapter(dashboardNotifications);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            dashboardRecylcerView.setAdapter(dashboardRecyclerViewAdapter);
+        }
     }
 
     @SuppressLint("MissingPermission")
@@ -155,6 +191,12 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSwipeTop() {
                 super.onSwipeTop();
+                displayDialog();
+            }
+
+            @Override
+            public void onSwipeBottom() {
+                super.onSwipeBottom();
                 displayDialog();
             }
         });
