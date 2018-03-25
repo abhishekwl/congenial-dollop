@@ -9,6 +9,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,12 +20,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.mikhaellopez.circularfillableloaders.CircularFillableLoaders;
 
 import java.io.IOException;
 
+import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import butterknife.Unbinder;
 import io.github.abhishekwl.electricsheepprimary.R;
 
@@ -41,6 +45,9 @@ public class RadioFragment extends Fragment {
     @BindView(R.id.radioTowerImageView) ImageView radioImageView;
     @BindView(R.id.radioInternetRadioTextView) TextView internetRadioTextView;
     @BindView(R.id.radioPauseButton) Button pauseButton;
+    @BindView(R.id.radioLoader) CircularFillableLoaders circularFillableLoaders;
+
+    @BindColor(R.color.colorSecondary) int colorSecondary;
 
     public RadioFragment() {}
 
@@ -89,6 +96,10 @@ public class RadioFragment extends Fragment {
 
     @OnClick(R.id.radioPauseButton)
     public void onPauseButtonClick() {
+        toggleMediaPlayer();
+    }
+
+    private void toggleMediaPlayer() {
         if (mediaPlayer.isPlaying()) {
             mediaPlayer.pause();
             pauseButton.setText("Play");
@@ -96,6 +107,19 @@ public class RadioFragment extends Fragment {
             mediaPlayer.start();
             pauseButton.setText("Pause");
         }
+    }
+
+    @OnClick(R.id.radioLoader)
+    public void onLoaderClick() {
+        toggleMediaPlayer();
+    }
+
+    @OnLongClick(R.id.radioLoader)
+    public boolean onLoaderLongPress() {
+        if (mediaPlayer.isPlaying()) mediaPlayer.stop();
+        mediaPlayer.reset();
+        Snackbar.make(circularFillableLoaders, "Stream Reset", Snackbar.LENGTH_SHORT).show();
+        return true;
     }
 
     @OnClick(R.id.radioFmButton)

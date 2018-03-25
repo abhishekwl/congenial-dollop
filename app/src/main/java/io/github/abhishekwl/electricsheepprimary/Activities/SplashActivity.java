@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (firebaseAuth.getCurrentUser()==null) startActivity(new Intent(SplashActivity.this, WelcomeActivity.class));
-                else startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                else startActivity(new Intent(SplashActivity.this, FeedbackActivity.class));
                 finish();
             }
         }, SPLASH_DELAY);

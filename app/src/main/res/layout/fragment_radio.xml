@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorSecondary"
     tools:context="io.github.abhishekwl.electricsheepprimary.Fragments.RadioFragment">
 
@@ -62,6 +63,18 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+        <com.mikhaellopez.circularfillableloaders.CircularFillableLoaders
+            android:id="@+id/radioLoader"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/energy_secondary"
+            app:cfl_wave_color="@color/colorPrimary"
+            app:cfl_progress="70"
+            app:cfl_border="true"
+            app:cfl_border_width="1dp"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 

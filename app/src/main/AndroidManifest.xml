@@ -22,9 +22,11 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBQs31ewvSr46v8mGxAE-EkvOpomV-p1p8"/>
+            android:value="AIzaSyBQs31ewvSr46v8mGxAE-EkvOpomV-p1p8" />
+
         <activity
             android:name=".Activities.SplashActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,11 +36,16 @@
         </activity>
         <activity
             android:name=".Activities.WelcomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Fullscreen" />
-        <activity android:name=".Activities.SignInActivity" android:theme="@style/AppTheme.Fullscreen" />
+        <activity
+            android:name=".Activities.SignInActivity"
+            android:theme="@style/AppTheme.Fullscreen" />
         <activity
             android:name=".Activities.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Fullscreen" />
+        <activity android:name=".Activities.FeedbackActivity" android:theme="@style/AppTheme.Fullscreen"></activity>
     </application>
 
 </manifest>

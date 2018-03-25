@@ -55,6 +55,7 @@ import java.util.Date;
 import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.github.abhishekwl.electricsheepprimary.Adapters.DashboardRecyclerViewAdapter;
 import io.github.abhishekwl.electricsheepprimary.Models.DashboardNotification;
@@ -131,6 +132,11 @@ public class HomeFragment extends Fragment {
             dashboardRecylcerView.setAdapter(dashboardRecyclerViewAdapter);
             dashboardRecylcerView.scrollToPosition(0);
         }
+    }
+
+    @OnClick(R.id.homeLogoutButton)
+    public void onLogoutButtonPress() {
+        firebaseAuth.signOut();
     }
 
     @SuppressLint("MissingPermission")

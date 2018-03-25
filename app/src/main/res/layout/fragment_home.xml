@@ -41,19 +41,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <Button
-                    android:id="@+id/homeViewTravelPlanButton"
-                    android:layout_marginBottom="32dp"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
-                    android:textAllCaps="false"
-                    android:text="View Travel Plan"
-                    android:background="@drawable/rounded_button_accent"
+                <LinearLayout
                     android:layout_marginTop="40dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_marginBottom="32dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/homeViewTravelPlanButton"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textAllCaps="false"
+                        android:text="View Travel Plan"
+                        android:background="@drawable/rounded_button_accent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/homeLogoutButton"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="18sp"
+                        android:textAllCaps="false"
+                        android:text="Logout"
+                        android:layout_marginStart="24dp"
+                        android:background="@drawable/round_button_white"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
 
             </LinearLayout>
 

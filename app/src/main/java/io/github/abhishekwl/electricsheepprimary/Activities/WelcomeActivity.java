@@ -1,5 +1,6 @@
 package io.github.abhishekwl.electricsheepprimary.Activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,6 +15,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -59,6 +67,29 @@ public class WelcomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        getPermissions();
+    }
+
+    private void getPermissions() {
+        Dexter.withActivity(WelcomeActivity.this)
+                .withPermissions(
+                        android.Manifest.permission.CAMERA,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION,
+                        android.Manifest.permission.BLUETOOTH,
+                        android.Manifest.permission.BLUETOOTH_ADMIN,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.CALL_PHONE
+                ).withListener(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+
+            }
+        }).check();
     }
 
     @Override
