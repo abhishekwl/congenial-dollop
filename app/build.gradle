@@ -39,6 +39,7 @@ dependencies {
     compile 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
     compile 'com.github.stfalcon:chatkit:0.2.2'
     compile 'com.google.android.gms:play-services-places:12.0.0'
+    compile 'com.google.android.gms:play-services-nearby:12.0.0'
     compile 'com.google.android.gms:play-services-maps:12.0.0'
     compile 'com.google.android.gms:play-services-location:12.0.0'
     compile 'com.github.aboutgaurav:gesto:0.1.0'

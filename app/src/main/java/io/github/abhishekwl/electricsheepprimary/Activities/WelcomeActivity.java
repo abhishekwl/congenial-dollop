@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -25,6 +24,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import io.github.abhishekwl.electricsheepprimary.R;
 
@@ -51,22 +51,20 @@ public class WelcomeActivity extends AppCompatActivity {
         initializeViews();
     }
 
+
+    @OnClick(R.id.welcomeSignInButton)
+    public void onSignInButtonPress() {
+        if (firebaseAuth.getCurrentUser()==null) startActivity(new Intent(WelcomeActivity.this, SignInActivity.class));
+        else startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+    }
+
     private void initializeViews() {
         Glide.with(getApplicationContext()).load(R.drawable.energy_white).into(appLogoImageView);
         futuraTypeface = Typeface.createFromAsset(getAssets(), "fonts/futura.ttf");
         firebaseAuth = FirebaseAuth.getInstance();
-
         welcomeTextView.setTypeface(futuraTypeface);
         signInButton.setTypeface(futuraTypeface);
         signUpButton.setTypeface(futuraTypeface);
-
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(WelcomeActivity.this, SignInActivity.class));
-                finish();
-            }
-        });
 
         getPermissions();
     }
