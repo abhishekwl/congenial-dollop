@@ -204,6 +204,12 @@ public class HomeFragment extends Fragment {
                 super.onSwipeTop();
                 displayDialog();
             }
+
+            @Override
+            public void onSwipeBottom() {
+                super.onSwipeBottom();
+                displayDialog();
+            }
         });
     }
 

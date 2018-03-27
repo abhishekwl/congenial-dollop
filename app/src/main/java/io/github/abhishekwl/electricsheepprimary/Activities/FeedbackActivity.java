@@ -51,6 +51,12 @@ public class FeedbackActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @OnClick(R.id.feedbackContinueButton)
+    public void onContinueButtonPress() {
+        startActivity(new Intent(FeedbackActivity.this, WelcomeActivity.class));
+        finish();
+    }
+
     @OnClick(R.id.feedbackTitleTextView)
     public void onSkipButtonClick() {
         startActivity(new Intent(FeedbackActivity.this, WelcomeActivity.class));

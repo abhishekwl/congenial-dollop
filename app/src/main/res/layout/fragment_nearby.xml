@@ -2,41 +2,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:padding="16dp"
     android:orientation="vertical"
     tools:context="io.github.abhishekwl.electricsheepprimary.Fragments.NearbyFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-    </android.support.v7.widget.RecyclerView>
+    <com.airbnb.lottie.LottieAnimationView
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_fileName="lottie/bluetooth.json"
+        android:layout_width="128dp"
+        android:layout_height="128dp" />
 
     <LinearLayout
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:gravity="center"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputLayout
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content">
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/nearbyMessageEditText"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif-light"
-                android:hint="Message"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:id="@+id/nearbyDistanceTextView"
+            android:textColor="@color/colorTextDark"
+            android:textSize="80sp"
+            android:gravity="center"
+            android:text="Looking for your beacons :)"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/nearbySendButton"
-            android:src="@drawable/ic_navigate_next_black_24dp"
-            android:tint="@color/colorPrimary"
-            android:layout_margin="8dp"
+        <TextView
+            android:gravity="center"
+            android:id="@+id/nearbyDistanceUnitTextView"
+            android:textColor="@color/colorSecondary"
+            android:textSize="16sp"
+            android:text=" METRES\nAWAY"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
