@@ -104,7 +104,7 @@ public class BotFragment extends Fragment {
     }
 
     private void performHttpRequest(String message) {
-        String requestUrl = getString(R.string.BASE_SERVER_URL)+"?uid="+firebaseAuth.getCurrentUser().getUid()+"&message="+message;
+        String requestUrl = getString(R.string.BASE_DOMAIN_URL)+getString(R.string.BASE_SERVER_URL)+"?uid="+firebaseAuth.getCurrentUser().getUid()+"&message="+message;
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

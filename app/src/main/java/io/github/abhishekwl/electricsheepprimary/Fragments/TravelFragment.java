@@ -107,7 +107,7 @@ public class TravelFragment extends Fragment {
     }
 
     private void performHttpRequest(View rootView) {
-        String requestUrl = getString(R.string.BASE_SERVER_URL)+"?uid="+firebaseAuth.getCurrentUser().getUid();
+        String requestUrl = getString(R.string.BASE_DOMAIN_URL)+getString(R.string.BASE_SERVER_URL)+"?uid="+firebaseAuth.getCurrentUser().getUid();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -56,6 +57,7 @@ import butterknife.BindColor;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import butterknife.Unbinder;
 import io.github.abhishekwl.electricsheepprimary.Adapters.DashboardRecyclerViewAdapter;
 import io.github.abhishekwl.electricsheepprimary.Models.DashboardNotification;
@@ -71,6 +73,7 @@ public class HomeFragment extends Fragment {
     @BindView(R.id.homeWelcomeTextView) TextView welcomeTextView;
     @BindView(R.id.homeViewTravelPlanButton) Button travelPlanButton;
     @BindView(R.id.homeDashboardTextView) TextView dashboardTextView;
+    @BindView(R.id.homeCollapsingToolbarLayout) CollapsingToolbarLayout collapsingToolbarLayout;
     @BindColor(R.color.colorAccent) int colorAccent;
 
     private PlaceDetectionClient placeDetectionClient;
@@ -152,65 +155,100 @@ public class HomeFragment extends Fragment {
                 bottomNavigationView.setSelectedItemId(R.id.menuItemTravelPlan);
             }
         });
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                deviceLocation = location;
-                Log.v("LAT: "+deviceLocation.getLatitude(), "\tLONG: "+deviceLocation.getLongitude());
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.v("ERR", e.getMessage());
-            }
-        });
+
+        try {
+            fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+            fusedLocationProviderClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    deviceLocation = location;
+                    Log.v("LAT: "+deviceLocation.getLatitude(), "\tLONG: "+deviceLocation.getLongitude());
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.v("ERR", e.getMessage());
+                }
+            });
+        } catch (Exception ex) {
+            materialDialog = new MaterialDialog.Builder(rootView.getContext())
+                    .title("Electric Sheep")
+                    .iconRes(R.drawable.energy_grey)
+                    .content("Please turn on your GPS")
+                    .show();
+            Log.v("HomeSetupListeners", ex.getMessage());
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void setupHeader(View rootView) {
-        Glide.with(rootView.getContext()).load(R.drawable.energy_white).into(appLogoImageView);
-        futuraTypeface = Typeface.createFromAsset(rootView.getContext().getAssets(), "fonts/futura.ttf");
+        try {
+            Glide.with(rootView.getContext()).load(R.drawable.energy_white).into(appLogoImageView);
+            futuraTypeface = Typeface.createFromAsset(rootView.getContext().getAssets(), "fonts/futura.ttf");
 
-        welcomeTextView.setTypeface(futuraTypeface);
-        travelPlanButton.setTypeface(futuraTypeface);
-        dashboardTextView.setTypeface(futuraTypeface);
+            welcomeTextView.setTypeface(futuraTypeface);
+            travelPlanButton.setTypeface(futuraTypeface);
+            dashboardTextView.setTypeface(futuraTypeface);
 
-        bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
+            bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
 
-        placeDetectionClient = Places.getPlaceDetectionClient(getActivity());
-        @SuppressLint("MissingPermission") Task<PlaceLikelihoodBufferResponse> placeResult = placeDetectionClient.getCurrentPlace(null);
-        placeResult.addOnSuccessListener(new OnSuccessListener<PlaceLikelihoodBufferResponse>() {
-            @SuppressLint("RestrictedApi")
-            @Override
-            public void onSuccess(PlaceLikelihoodBufferResponse placeLikelihoods) {
-                if (placeLikelihoods.getCount()>0) {
-                    String placeName = placeLikelihoods.get(0).getPlace().getName().toString();
-                    welcomeTextView.setText("Welcome to "+placeName+".");
+            placeDetectionClient = Places.getPlaceDetectionClient(getActivity());
+            @SuppressLint("MissingPermission") Task<PlaceLikelihoodBufferResponse> placeResult = placeDetectionClient.getCurrentPlace(null);
+            placeResult.addOnSuccessListener(new OnSuccessListener<PlaceLikelihoodBufferResponse>() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onSuccess(PlaceLikelihoodBufferResponse placeLikelihoods) {
+                    if (placeLikelihoods.getCount()>0) {
+                        String placeName = placeLikelihoods.get(0).getPlace().getName().toString();
+                        welcomeTextView.setText("Welcome to "+placeName+".");
+                    }
+                    placeLikelihoods.release();
                 }
-                placeLikelihoods.release();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                welcomeTextView.setText("Welcome.");
-                Log.v("HOME_FRAG", e.getMessage());
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    welcomeTextView.setText("Welcome.");
+                    Log.v("HOME_FRAG", e.getMessage());
+                }
+            });
 
-        appLogoImageView.setOnTouchListener(new OnGestureListener(getActivity()){
-            @Override
-            public void onSwipeTop() {
-                super.onSwipeTop();
-                displayDialog();
-            }
+            appLogoImageView.setOnTouchListener(new OnGestureListener(getActivity()){
+                @Override
+                public void onSwipeTop() {
+                    super.onSwipeTop();
+                    displayDialog();
+                }
 
-            @Override
-            public void onSwipeBottom() {
-                super.onSwipeBottom();
-                displayDialog();
-            }
-        });
+                @Override
+                public void onSwipeBottom() {
+                    super.onSwipeBottom();
+                    displayDialog();
+                }
+            });
+            
+            welcomeTextView.setOnTouchListener(new OnGestureListener(getActivity()){
+                @Override
+                public void onSwipeTop() {
+                    super.onSwipeTop();
+                    displayDialog();
+                }
+
+                @Override
+                public void onSwipeBottom() {
+                    super.onSwipeBottom();
+                    displayDialog();
+                }
+            });
+
+        } catch (Exception ex) {
+            Log.v("setupHeader", ex.getMessage());
+        }
+    }
+
+    @OnLongClick(R.id.homeAppLogoImageView)
+    public boolean onAppLogoImageViewPress() {
+        displayDialog();
+        return true;
     }
 
     private void displayDialog() {
@@ -239,7 +277,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void performHttpRequest(View rootView) {
-        String requestUrl = getString(R.string.BASE_SERVER_URL)+"?uid="+firebaseAuth.getCurrentUser().getUid();
+        String requestUrl = getString(R.string.BASE_DOMAIN_URL)+getString(R.string.BASE_SERVER_URL)+"?uid="+firebaseAuth.getCurrentUser().getUid();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, requestUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -257,6 +295,10 @@ public class HomeFragment extends Fragment {
         try {
             userObject = response;
             userObject.put("sos_now", new Date().toString());
+            if (deviceLocation!=null) {
+                userObject.put("latitude", deviceLocation.getLatitude());
+                userObject.put("longitude", deviceLocation.getLongitude());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -123,23 +123,26 @@ public class NearbyFragment extends Fragment {
             @Override
             public void onFound(Message message) {
                 super.onFound(message);
-                Log.v("onFound", new String(message.getContent()));
+                try {
+                    Log.v("onFound", new String(message.getContent()));
 
-                String locationString = new String(message.getContent());
-                String[] latLonArr = locationString.split(",");
-                double foreginLat = Double.parseDouble(latLonArr[0]);
-                double foreignLon = Double.parseDouble(latLonArr[1]);
+                    String locationString = new String(message.getContent());
+                    String[] latLonArr = locationString.split(",");
+                    double foreginLat = Double.parseDouble(latLonArr[0]);
+                    double foreignLon = Double.parseDouble(latLonArr[1]);
 
-                if (deviceLocation!=null) {
-                    double devLat = deviceLocation.getLatitude();
-                    double devLon = deviceLocation.getLongitude();
+                    if (deviceLocation!=null) {
+                        double devLat = deviceLocation.getLatitude();
+                        double devLon = deviceLocation.getLongitude();
 
-                    double distanceBetweenCoords = distance(foreginLat, devLat, foreignLon, devLon);
-                    DecimalFormat df = new DecimalFormat("#.####");
-                    distanceTextView.setText(""+df.format(distanceBetweenCoords/1000));
-                    Log.v("DSB ", Double.toString(distanceBetweenCoords));
+                        double distanceBetweenCoords = distance(foreginLat, devLat, foreignLon, devLon);
+                        DecimalFormat df = new DecimalFormat("#.####");
+                        distanceTextView.setText(""+df.format(distanceBetweenCoords/1000));
+                        Log.v("DSB ", Double.toString(distanceBetweenCoords));
+                    }
+                } catch (Exception ex) {
+                    Log.v("initMessageListener", ex.getMessage());
                 }
-
             }
 
             @Override
