@@ -74,7 +74,7 @@ public class RadioFragment extends Fragment {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.reset();
             //mediaPlayer.setDataSource("http://192.168.10.168:8000/stream1");
-            mediaPlayer.setDataSource("http://192.168.10.158:8080/Marshmello_ft_Khalid_-_Silence_Talkmuzik.mp3");
+            mediaPlayer.setDataSource("http://192.168.43.22:8080/Marshmello_ft_Khalid_-_Silence_Talkmuzik.mp3");
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override

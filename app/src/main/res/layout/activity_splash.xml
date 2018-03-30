@@ -1,17 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context="io.github.abhishekwl.electricsheepprimary.Activities.SplashActivity">
 
     <ImageView
-        android:id="@+id/splashAppLogoImageView"
-        tools:src="@drawable/energy_grey"
-        android:layout_width="164dp"
-        android:layout_height="164dp" />
+        android:layout_centerInParent="true"
+        android:id="@+id/splashIrctcImageView"
+        tools:src="@drawable/irctc"
+        android:layout_width="128dp"
+        android:layout_height="128dp" />
 
-</LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="24sp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@android:color/black"
+            android:text="Powered by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/splashAppLogoImageView"
+            tools:src="@drawable/energy_grey"
+            android:layout_width="128dp"
+            android:layout_height="128dp" />
+
+        <TextView
+            android:id="@+id/splashAppLogoTextView"
+            android:textColor="@color/colorTextDark"
+            android:layout_marginTop="8dp"
+            android:textSize="32sp"
+            android:text="ELECTRIC SHEEP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>
