@@ -94,7 +94,6 @@ public class HomeFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
@@ -132,8 +131,12 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            dashboardRecylcerView.setAdapter(dashboardRecyclerViewAdapter);
-            dashboardRecylcerView.scrollToPosition(0);
+            try {
+                dashboardRecylcerView.setAdapter(dashboardRecyclerViewAdapter);
+                dashboardRecylcerView.scrollToPosition(0);
+            } catch (Exception ex) {
+                Log.v("ON_POST_EXECUTE", ex.getMessage());
+            }
         }
     }
 
@@ -198,17 +201,30 @@ public class HomeFragment extends Fragment {
                 @SuppressLint("RestrictedApi")
                 @Override
                 public void onSuccess(PlaceLikelihoodBufferResponse placeLikelihoods) {
-                    if (placeLikelihoods.getCount()>0) {
-                        String placeName = placeLikelihoods.get(0).getPlace().getName().toString();
-                        welcomeTextView.setText("Welcome to "+placeName+".");
+
+                    try {
+
+                        if (placeLikelihoods.getCount()>0) {
+                            String placeName = placeLikelihoods.get(0).getPlace().getName().toString();
+                            welcomeTextView.setText("Welcome to "+placeName+".");
+                        }
+                        placeLikelihoods.release();
+                    } catch (Exception ex) {
+                        Log.v("EX", ex.getMessage());
                     }
-                    placeLikelihoods.release();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     welcomeTextView.setText("Welcome.");
                     Log.v("HOME_FRAG", e.getMessage());
+                }
+            });
+
+            welcomeTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    displayDialog();
                 }
             });
 
@@ -251,8 +267,8 @@ public class HomeFragment extends Fragment {
         return true;
     }
 
-    private void displayDialog() {
-        materialDialog = new MaterialDialog.Builder(getActivity())
+    public void displayDialog() {
+        materialDialog = new MaterialDialog.Builder(rootView.getContext())
                 .title("Electric Sheep")
                 .iconRes(R.drawable.energy_small)
                 .content("Are you sure you want us to put you through Emergency Services?")

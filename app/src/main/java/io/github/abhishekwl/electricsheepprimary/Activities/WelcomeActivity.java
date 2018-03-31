@@ -51,7 +51,6 @@ public class WelcomeActivity extends AppCompatActivity {
         initializeViews();
     }
 
-
     @OnClick(R.id.welcomeSignInButton)
     public void onSignInButtonPress() {
         if (firebaseAuth.getCurrentUser()==null) startActivity(new Intent(WelcomeActivity.this, SignInActivity.class));

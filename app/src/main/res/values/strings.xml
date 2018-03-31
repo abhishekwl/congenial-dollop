@@ -1,7 +1,7 @@
 <resources>
     <!--<string name="BASE_SERVER_URL">http://192.168.43.22:4269/api</string>-->
     <string name="app_name">Electric Sheep Primary</string>
-    <string name="BASE_DOMAIN_URL">http://192.168.43.22</string>
+    <string name="BASE_DOMAIN_URL">http://192.168.137.192</string>
     <string name="BASE_SERVER_URL">:4269/api</string>
     <string name="hello_blank_fragment">3 times</string>
     <string name="API_JKEY">AIzaSyBQs31ewvSr46v8mGxAE-EkvOpomV-p1p8</string>

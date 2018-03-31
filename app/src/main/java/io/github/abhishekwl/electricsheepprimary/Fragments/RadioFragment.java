@@ -74,17 +74,21 @@ public class RadioFragment extends Fragment {
             mediaPlayer = new MediaPlayer();
             mediaPlayer.reset();
             //mediaPlayer.setDataSource("http://192.168.10.168:8000/stream1");
-            mediaPlayer.setDataSource(getString(R.string.BASE_DOMAIN_URL)+":8080/Marshmello_ft_Khalid_-_Silence_Talkmuzik.mp3");
+            mediaPlayer.setDataSource(getString(R.string.BASE_DOMAIN_URL)+":8080/one.mp3");
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mp) {
+                    if(mediaPlayer.isPlaying()) pauseButton.setText("Pause");
+                    else pauseButton.setText("Play");
                     mediaPlayer.start();
                 }
             });
             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
+                    if (mediaPlayer.isPlaying()) pauseButton.setText("Pause");
+                    else pauseButton.setText("Pause");
                     mediaPlayer.seekTo(0);
                 }
             });
